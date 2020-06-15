@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let nextRandom = 0
     let timerId
     let score = 0
+    const COLORS = [
+        'orange','red', 'purple', 'green', 'blue'
+    ]
     
   //The Tetrominoes
     const lTetromino = [
@@ -52,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function draw(){
     current.forEach(index => {
         squares[currentPosition + index].classList.add('tetromino')
+        squares[currentPosition + index].style.backgroundColor = COLORS[random]
     })
 }
 draw()
@@ -60,6 +64,7 @@ draw()
   function undraw(){
     current.forEach(index => {
         squares[currentPosition + index].classList.remove('tetromino')
+        squares[currentPosition + index].style.backgroundColor = ''
     })
 }
 
@@ -143,7 +148,7 @@ draw()
   //Show mini Tetromino
   const DISPLAYSQUARE = document.querySelectorAll('.mini-grid div')
   const DISPLAYWIDTH = 4
-  let displayIndex = 0
+  const DISPLAYINDEX = 0
   
 
   //Tetromino without rotation
@@ -159,9 +164,11 @@ draw()
   function displayShape(){
     DISPLAYSQUARE.forEach(square =>{
         square.classList.remove('tetromino')
+        square.style.backgroundColor = ''
     })
     UPNEXTTETROMINOES[nextRandom].forEach( index => {
-        DISPLAYSQUARE[displayIndex + index].classList.add('tetromino')
+        DISPLAYSQUARE[DISPLAYINDEX + index].classList.add('tetromino')
+        DISPLAYSQUARE[DISPLAYINDEX + index].style.backgroundColor = COLORS[nextRandom]
     })
   }
 
@@ -189,6 +196,7 @@ draw()
               ROW.forEach(index => {
                   squares[index].classList.remove('taken')
                   squares[index].classList.remove('tetromino')
+                  squares[index].style.backgroundColor = ''
               })
             const SQUAREREMOVED = squares.splice(i, GRID_WIDTH)
             squares = SQUAREREMOVED.concat(squares)
